@@ -6,27 +6,16 @@ public class MateStack<T> {
     private Node<T> firstElement;
     private int iterator = 0;
 
-    public MateStack() {
-        this.firstElement = null;
-    }
-
     public void push(T value) {
-        Node<T> firstPushElement = new Node<>();
-        if (firstPushElement == null) {
-            return;
-        }
-        firstPushElement.element = value;
-        firstPushElement.nextNode = firstElement;
-        firstElement = firstPushElement;
+        firstElement = new Node<>(value, firstElement);
         iterator++;
     }
 
     public T peek() {
         if (Objects.nonNull(firstElement)){
             return firstElement.element;
-        } else {
-            throw new IndexOutOfBoundsException("Stack is empty");
         }
+            throw new IndexOutOfBoundsException("Stack is empty");
     }
 
     public T pop() {
@@ -46,5 +35,10 @@ public class MateStack<T> {
     private static class Node<T> {
         private T element;
         private Node<T> nextNode;
+
+        public Node(T element, Node<T> nextNode) {
+            this.element = element;
+            this.nextNode = nextNode;
+        }
     }
 }
